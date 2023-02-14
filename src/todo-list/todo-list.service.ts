@@ -27,18 +27,20 @@ export class TodoListService {
   }
 
   deleteTodoByIdForUser(userId: number, id: number): Todo[] {
-    const todos = this.getTodosForUser(userId);
-    const index = todos.findIndex((todo) => todo.id === Number(id));
+    const index = this.todos.findIndex(
+      (todo) => todo.id === Number(id) && todo.userId === userId,
+    );
     if (index === -1) {
       throw new NotFoundException('Todo not found');
     }
     this.todos.splice(index, 1);
-    return this.todos;
+    return this.getTodosForUser(userId);
   }
 
   updateTodoByIdForUser(userId: number, id: number, task: Task): Todo[] {
-    const todos = this.getTodosForUser(userId);
-    const index = todos.findIndex((todo) => todo.id === Number(id));
+    const index = this.todos.findIndex(
+      (todo) => todo.id === Number(id) && todo.userId === userId,
+    );
     if (index === -1) {
       throw new NotFoundException('Todo not found');
     }
@@ -47,7 +49,7 @@ export class TodoListService {
       done: task.done,
       task: task.value,
     };
-    return this.todos;
+    return this.getTodosForUser(userId);
   }
 
   getTodoByIdForUser(userId: number, id: number): Todo[] {
@@ -56,8 +58,9 @@ export class TodoListService {
   }
 
   toggleTodoByIdForUser(userId: number, id: number): Todo[] {
-    const todos = this.getTodosForUser(userId);
-    const index = todos.findIndex((todo) => todo.id === Number(id));
+    const index = this.todos.findIndex(
+      (todo) => todo.id === Number(id) && todo.userId === userId,
+    );
     if (index === -1) {
       throw new NotFoundException('Todo not found');
     }

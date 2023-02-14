@@ -82,7 +82,7 @@ export class TodoListController {
   @ApiCreatedResponse({
     type: [Todo],
   })
-  @Get('toggle/one/:id')
+  @Post('toggle/one/:id')
   toggleTodoByIdForUser(@Request() req, @Param('id') id: number): Todo[] {
     const userId = req.user.userId;
     return this.todoListService.toggleTodoByIdForUser(userId, id);
