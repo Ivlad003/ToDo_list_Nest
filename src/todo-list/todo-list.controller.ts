@@ -15,7 +15,7 @@ import { ApiBody, ApiCreatedResponse, ApiHeader } from '@nestjs/swagger';
 import { Todo, Task } from '../model';
 
 @ApiHeader({
-  name: 'my_auth_head',
+  name: 'my-token',
   description: 'Bearer token',
 })
 @Controller('todo-list')

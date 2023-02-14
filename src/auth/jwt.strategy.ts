@@ -9,8 +9,10 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
     super({
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
       jwtFromRequest: (req: any): string | null => {
-        return (req.headers.my_auth_head as string).split(' ')[1];
+        console.log('jwtFromRequest', req.headers);
+        return (req.headers['my-token'] as string).split(' ')[1];
       },
+      // jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
       ignoreExpiration: false,
       secretOrKey: jwtConstants.secret,
     });

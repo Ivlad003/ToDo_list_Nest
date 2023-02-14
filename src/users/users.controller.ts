@@ -40,7 +40,7 @@ export class UsersController {
   }
 
   @ApiHeader({
-    name: 'my_auth_head',
+    name: 'my-token',
     description: 'Bearer token',
   })
   @ApiCreatedResponse({
