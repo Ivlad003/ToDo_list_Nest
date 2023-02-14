@@ -1,28 +1,5 @@
 import { BadRequestException, Injectable } from '@nestjs/common';
-import { ApiProperty } from '@nestjs/swagger';
-
-export class User {
-  @ApiProperty()
-  userId: number;
-  @ApiProperty()
-  username: string;
-  @ApiProperty()
-  password: string;
-}
-
-export class PublicUser {
-  @ApiProperty()
-  userId: number;
-  @ApiProperty()
-  username: string;
-}
-
-export class AuthDto {
-  @ApiProperty()
-  username: string;
-  @ApiProperty()
-  password: string;
-}
+import { AuthDto, User } from '../model';
 
 @Injectable()
 export class UsersService {

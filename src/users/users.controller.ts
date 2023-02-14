@@ -13,9 +13,9 @@ import {
   ApiResponse,
   ApiHeader,
 } from '@nestjs/swagger';
-import { AuthService, JwtPayload } from '../auth/auth.service';
+import { AuthService } from '../auth/auth.service';
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
-import { AuthDto, PublicUser } from './users.service';
+import { AuthDto, JwtPayload, PublicUser } from '../model';
 
 @Controller('users')
 export class UsersController {
@@ -38,7 +38,6 @@ export class UsersController {
   async register(@Body() authDto: AuthDto) {
     this.authService.register(authDto);
   }
-
 
   @ApiHeader({
     name: 'my_auth_head',

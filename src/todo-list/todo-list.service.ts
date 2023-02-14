@@ -1,22 +1,5 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
-import { ApiProperty } from '@nestjs/swagger';
-
-export class Todo {
-  userId: number;
-  @ApiProperty()
-  id: number;
-  @ApiProperty()
-  task: string;
-  @ApiProperty()
-  done: boolean;
-}
-
-export class Task {
-  @ApiProperty()
-  value: string;
-  @ApiProperty()
-  done: boolean;
-}
+import { Task, Todo } from '../model';
 
 @Injectable()
 export class TodoListService {
@@ -30,7 +13,7 @@ export class TodoListService {
   ];
 
   getTodosForUser(userId: number): Todo[] {
-    return this.todos.filter((todo) => todo.userId === userId);
+    return this.todos.filter((todo) => todo.userId == userId);
   }
 
   addTodoForUser(userId: number, task: Task): Todo[] {
@@ -38,13 +21,14 @@ export class TodoListService {
     newTodo.id = new Date().getTime();
     newTodo.userId = userId;
     newTodo.task = task.value;
+    newTodo.done = false;
     this.todos.push(newTodo);
-    return this.todos;
+    return this.getTodosForUser(userId);
   }
 
   deleteTodoByIdForUser(userId: number, id: number): Todo[] {
     const todos = this.getTodosForUser(userId);
-    const index = todos.findIndex((todo) => todo.id === id);
+    const index = todos.findIndex((todo) => todo.id === Number(id));
     if (index === -1) {
       throw new NotFoundException('Todo not found');
     }
@@ -54,7 +38,7 @@ export class TodoListService {
 
   updateTodoByIdForUser(userId: number, id: number, task: Task): Todo[] {
     const todos = this.getTodosForUser(userId);
-    const index = todos.findIndex((todo) => todo.id === id);
+    const index = todos.findIndex((todo) => todo.id === Number(id));
     if (index === -1) {
       throw new NotFoundException('Todo not found');
     }
@@ -68,6 +52,19 @@ export class TodoListService {
 
   getTodoByIdForUser(userId: number, id: number): Todo[] {
     const todos = this.getTodosForUser(userId);
-    return todos.filter((todo) => todo.id === id) || [];
+    return todos.filter((todo) => todo.id == id) || [];
+  }
+
+  toggleTodoByIdForUser(userId: number, id: number): Todo[] {
+    const todos = this.getTodosForUser(userId);
+    const index = todos.findIndex((todo) => todo.id === Number(id));
+    if (index === -1) {
+      throw new NotFoundException('Todo not found');
+    }
+    this.todos[index] = {
+      ...this.todos[index],
+      done: !this.todos[index].done,
+    };
+    return this.getTodosForUser(userId);
   }
 }
