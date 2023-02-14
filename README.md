@@ -1,6 +1,42 @@
 ## Description
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+
+```mermaid
+---
+title: Workflow
+---
+stateDiagram-v2
+    [*] --> Register
+    Register --> Login
+    Login --> CRUD
+    CRUD --> DB(local,memory)
+    DB(local,memory) --> [*]
+    
+```
+
+```mermaid
+sequenceDiagram
+    Note over Client,Server: User
+    Client-->>Server: [POST] + [body] register
+    activate Server
+    Server->>Client: 200 statusCode
+
+    Client-->>Server: [POST] + [body] login
+    activate Server
+    Server->>Client: access_token
+    
+    Note over Client,Server: TODOS
+    Client-->>Server: [POST]+[token] + [body] add new todo
+    activate Server
+    Server->>Client: list fo todos
+    deactivate Server
+    
+    Client-->>Server: [DELETE]+[token:(header:my_auth_head)]+[ID] remove new todo
+    activate Server
+    Server->>Client: list fo todos
+    deactivate Server
+
+```
 
 ## Installation
 
