@@ -57,19 +57,6 @@ $ yarn run start:dev
 $ yarn run start:prod
 ```
 
-## Test
-
-```bash
-# unit tests
-$ yarn run test
-
-# e2e tests
-$ yarn run test:e2e
-
-# test coverage
-$ yarn run test:cov
-```
-
 ```curl
 $ # GET /profile
 $ curl http://localhost:3000/profile
@@ -80,6 +67,6 @@ $ curl -X POST http://localhost:3000/auth/login -d '{"username": "john", "passwo
 $ # result -> {"access_token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2Vybm... }
 
 $ # GET /profile using access_token returned from previous step as bearer code
-$ curl http://localhost:3000/profile -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2Vybm..."
+$ curl http://localhost:3000/users/profile -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2Vybm..."
 $ # result -> {"userId":1,"username":"john"}
 ```
