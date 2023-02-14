@@ -14,7 +14,7 @@ import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 import { ApiBody, ApiCreatedResponse, ApiHeader } from '@nestjs/swagger';
 
 @ApiHeader({
-  name: 'Authorization',
+  name: 'my_auth_head',
   description: 'Bearer token',
 })
 @Controller('todo-list')

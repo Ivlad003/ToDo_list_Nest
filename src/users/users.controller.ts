@@ -39,8 +39,9 @@ export class UsersController {
     this.authService.register(authDto);
   }
 
+
   @ApiHeader({
-    name: 'Authorization',
+    name: 'my_auth_head',
     description: 'Bearer token',
   })
   @ApiCreatedResponse({
