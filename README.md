@@ -2,10 +2,11 @@
 
 ```mermaid
 flowchart LR
-    http_client <--> Register_endpoint
-    http_client <--> Login_endpoint
-    http_client <--> Todos_endpoint
-    http_client <--> ...
+    http_client -. credentials .-> Register_endpoint
+    http_client -. credentials .-> Login_endpoint
+    Login_endpoint -. token .-> http_client
+    http_client <-. token .-> Todos_endpoint
+    http_client <-. token .-> ...
     Register_endpoint <--> CRUD
     CRUD <--> id1[(Local db in memory)]
     Login_endpoint <--> CRUD
