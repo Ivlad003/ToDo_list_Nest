@@ -1,17 +1,16 @@
 ## Description
 
-
 ```mermaid
----
-title: Workflow
----
-stateDiagram-v2
-    [*] --> Register
-    Register --> Login
-    Login --> CRUD
-    CRUD --> DB(local,memory)
-    DB(local,memory) --> [*]
-    
+flowchart LR
+    http_client <--> Register_endpoint
+    http_client <--> Login_endpoint
+    http_client <--> Todos_endpoint
+    http_client <--> ...
+    Register_endpoint <--> CRUD
+    CRUD <--> id1[(Local db in memory)]
+    Login_endpoint <--> CRUD
+    Todos_endpoint <--> CRUD
+    ... <--> CRUD
 ```
 
 ```mermaid
@@ -35,6 +34,7 @@ sequenceDiagram
     activate Server
     Server->>Client: list of todos
     deactivate Server
+    Note over Client,Server: ...
 
 ```
 
