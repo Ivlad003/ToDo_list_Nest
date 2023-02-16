@@ -11,9 +11,15 @@ import {
 } from '@nestjs/common';
 import { TodoListService } from './todo-list.service';
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
-import { ApiBody, ApiCreatedResponse, ApiHeader } from '@nestjs/swagger';
+import {
+  ApiBearerAuth,
+  ApiBody,
+  ApiCreatedResponse,
+  ApiHeader,
+} from '@nestjs/swagger';
 import { Todo, Task } from '../model';
 
+@ApiBearerAuth('my-token')
 @ApiHeader({
   name: 'my-token',
   description: 'Bearer token',

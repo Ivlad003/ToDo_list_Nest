@@ -12,6 +12,7 @@ import {
   ApiCreatedResponse,
   ApiResponse,
   ApiHeader,
+  ApiBearerAuth,
 } from '@nestjs/swagger';
 import { AuthService } from '../auth/auth.service';
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
@@ -38,6 +39,7 @@ export class UsersController {
     this.authService.register(authDto);
   }
 
+  @ApiBearerAuth('my-token')
   @ApiHeader({
     name: 'my-token',
     description: 'Bearer token',
