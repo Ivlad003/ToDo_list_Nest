@@ -21,14 +21,13 @@ import { AuthDto, JwtPayload, PublicUser } from '../model';
 export class UsersController {
   constructor(private authService: AuthService) {}
 
-  @UseGuards(AuthGuard('local'))
   @ApiBody({ type: AuthDto })
   @Post('auth/login')
   @ApiCreatedResponse({
     type: JwtPayload,
   })
-  async login(@Request() req): Promise<JwtPayload> {
-    return this.authService.login(req.user);
+  async login(@Body() authDto: AuthDto): Promise<JwtPayload> {
+    return this.authService.login(authDto);
   }
 
   @Post('auth/register')

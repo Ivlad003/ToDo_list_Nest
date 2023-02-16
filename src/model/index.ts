@@ -1,4 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
+import { IsEmail } from 'class-validator';
 
 export class JwtPayload {
   @ApiProperty()
@@ -7,10 +8,13 @@ export class JwtPayload {
 
 export class Todo {
   userId: number;
+
   @ApiProperty()
   id: number;
+
   @ApiProperty()
   task: string;
+
   @ApiProperty({ default: false })
   done: boolean;
 }
@@ -18,6 +22,7 @@ export class Todo {
 export class Task {
   @ApiProperty()
   value: string;
+
   @ApiProperty({ default: false })
   done: boolean;
 }
@@ -25,8 +30,11 @@ export class Task {
 export class User {
   @ApiProperty()
   userId: number;
+
+  @IsEmail()
   @ApiProperty()
-  username: string;
+  email: string;
+
   @ApiProperty()
   password: string;
 }
@@ -34,13 +42,17 @@ export class User {
 export class PublicUser {
   @ApiProperty()
   userId: number;
+
+  @IsEmail()
   @ApiProperty()
-  username: string;
+  email: string;
 }
 
 export class AuthDto {
   @ApiProperty()
-  username: string;
-  @ApiProperty()
   password: string;
+
+  @IsEmail()
+  @ApiProperty()
+  email: string;
 }
